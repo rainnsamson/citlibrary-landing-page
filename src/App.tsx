@@ -14,8 +14,8 @@ function App() {
           />
         </svg>
       ),
-      title: 'Digital Library',
-      description: 'Access thousands of e-books, journals, and academic papers from anywhere, anytime.',
+      title: "Digital Library",
+      description: "Access thousands of e-books, journals, and academic papers from anywhere, anytime.",
     },
     {
       icon: (
@@ -28,8 +28,8 @@ function App() {
           />
         </svg>
       ),
-      title: 'Research Support',
-      description: 'Expert assistance with research methodologies and academic writing guidance.',
+      title: "Research Support",
+      description: "Expert assistance with research methodologies and academic writing guidance.",
     },
     {
       icon: (
@@ -42,23 +42,23 @@ function App() {
           />
         </svg>
       ),
-      title: 'Collaborative Space',
-      description: 'Modern study areas designed for both individual focus and group collaboration.',
+      title: "Collaborative Space",
+      description: "Modern study areas designed for both individual focus and group collaboration.",
     },
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="pt-32 pb-16">
+      <main className="pt-20 pb-16">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 mb-20">
+        <section className="container mx-auto px-4 mb-12">
           <div
             className="rounded-3xl shadow-2xl p-8 md:p-16 text-white relative overflow-hidden"
             style={{
               backgroundImage: "url('/library.jpg')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -76,23 +76,21 @@ function App() {
           </div>
         </section>
 
-        {/* Search Section */}
-        <section className="container mx-auto px-4 mb-20">
-          <div className="bg-white p-8 rounded-xl shadow-md text-center">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">Online Public Access Catalog</h3>
-            <p className="text-lg text-gray-600 mb-6">Search our Library Collection</p>
-            <div className="flex justify-center items-center gap-4">
-              <input
-                type="text"
-                placeholder="Enter keywords..."
-                className="w-full md:w-2/3 px-4 py-3 rounded-lg border border-gray-300 focus:ring focus:ring-red-200 focus:outline-none"
-              />
-              <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition">
-                Search
-              </button>
-              <button className="text-red-600 hover:underline font-medium">Advanced Search</button>
-            </div>
+        {/* OPAC Search Bar */}
+        <section className="container mx-auto px-4 mb-12 text-center">
+          <h3 className="text-4xl font-bold text-gray-800">Online Public Access Catalog</h3>
+          <p className="text-lg text-gray-600 mt-2">Search our Library Collection</p>
+          <div className="flex items-center justify-center mt-6">
+            <input
+              type="text"
+              placeholder="Enter keywords or titles"
+              className="w-2/3 md:w-1/2 px-4 py-3 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button className="bg-blue-600 text-white px-6 py-3 rounded-r-full font-bold hover:bg-blue-700 transition-colors duration-300">
+              Search
+            </button>
           </div>
+          <button className="mt-4 text-blue-600 font-semibold hover:underline">Advanced Search</button>
         </section>
 
         {/* Features Section */}
