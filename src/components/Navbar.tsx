@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
     'School Program',
     'Facilities',
     'Activities',
-    'OPAC (Online Public Access Catalog',
+    'OPAC (Online Public Access Catalog)',
   ];
 
   return (
