@@ -6,11 +6,10 @@ const Navbar: React.FC = () => {
     'Home',
     'Services',
     'Resources',
-    'School of Basic Education',
-    'Connect',
+    'School Program',
     'Facilities',
-    'Libraries',
-    'Environmental Resources',
+    'Activities',
+    'OPAC (Online Public Access Catalog',
   ];
 
   return (
