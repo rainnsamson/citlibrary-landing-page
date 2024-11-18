@@ -51,35 +51,55 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <main className="pt-32 pb-16">
+        {/* Search Section */}
+        <section className="container mx-auto px-4 mb-10">
+          <div className="bg-white shadow-lg rounded-lg p-8 md:flex md:items-center md:justify-between">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-800">Online Public Access Catalog</h3>
+              <p className="text-gray-600 mt-2">Search our Library Collection</p>
+            </div>
+            <div className="mt-4 md:mt-0 flex items-center space-x-4">
+              <input
+                type="text"
+                placeholder="Search books, authors, topics..."
+                className="flex-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-red-500"
+              />
+              <button className="px-6 py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition">
+                Search
+              </button>
+              <button className="px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-md hover:bg-gray-200 transition">
+                Advanced Search
+              </button>
+            </div>
+          </div>
+        </section>
+
         {/* Hero Section */}
         <section className="container mx-auto px-4 mb-20">
-  <div
-    className="rounded-3xl shadow-2xl p-8 md:p-16 text-white relative overflow-hidden"
-    style={{
-      backgroundImage: "url('src/logo/library.jpg')",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  >
-    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-    <div className="relative z-10 text-center">
-      <img src="src/logo/CIT.png" alt="CIT Logo" className="w-32 h-auto mx-auto mb-4" />
-      <h2 className="text-6xl md:text-7xl font-bold leading-tight">
-        Caraga Institute of Technology
-      </h2>
-      <h3 className="text-3xl md:text-4xl font-semibold text-white"> {/* Changed to white */}
-        Library System
-      </h3>
-      <p className="text-lg md:text-xl mb-8 text-white"> {/* Changed to white */}
-        Empowering your academic journey with easy access to resources and expert guidance.
-      </p>
-      <button className="bg-white text-red-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-red-50 transition-colors duration-300 transform hover:scale-105 shadow-xl">
-        Explore Resources
-      </button>
-    </div>
-  </div>
-</section>
-
+          <div
+            className="rounded-3xl shadow-2xl p-8 md:p-16 text-white relative overflow-hidden"
+            style={{
+              backgroundImage: "url('src/logo/library.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+            <div className="relative z-10 text-center">
+              <img src="src/logo/CIT.png" alt="CIT Logo" className="w-32 h-auto mx-auto mb-4" />
+              <h2 className="text-6xl md:text-7xl font-bold leading-tight">
+                Caraga Institute of Technology
+              </h2>
+              <h3 className="text-3xl md:text-4xl font-semibold text-white">Library System</h3>
+              <p className="text-lg md:text-xl mb-8 text-white">
+                Empowering your academic journey with easy access to resources and expert guidance.
+              </p>
+              <button className="bg-white text-red-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-red-50 transition-colors duration-300 transform hover:scale-105 shadow-xl">
+                Explore Resources
+              </button>
+            </div>
+          </div>
+        </section>
 
         {/* Features Section */}
         <section className="container mx-auto px-4">
