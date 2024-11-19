@@ -1,6 +1,10 @@
 import { FaComments } from 'react-icons/fa';
 
-function ChatIcon({ onClick }: { onClick: () => void }) {
+interface ChatIconProps {
+  onClick: () => void; // Define the onClick prop type
+}
+
+function ChatIcon({ onClick }: ChatIconProps) {
   return (
     <button
       onClick={onClick}

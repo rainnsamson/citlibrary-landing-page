@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { collection, addDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
-import ChatIcon from './ChatIcon'; // Ensure the path to ChatIcon is correct
+import ChatIcon from './ChatIcon'; // Importing ChatIcon component
 
 interface Message {
   id: string;
@@ -16,7 +16,8 @@ function ChatBox() {
   const [newMessage, setNewMessage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  const chatId = auth.currentUser?.uid || 'guest'; // Use the current user's UID as chatId
+  // Generate a unique chatId for guests based on the user's UID or a random string
+  const chatId = auth.currentUser?.uid || `guest-${Math.random().toString(36).substr(2, 9)}`; // Generate a unique chatId for guests
 
   useEffect(() => {
     const chatSessionId = chatId;
@@ -48,7 +49,7 @@ function ChatBox() {
 
   return (
     <>
-      <ChatIcon onClick={() => setIsOpen(!isOpen)} />
+      <ChatIcon onClick={() => setIsOpen(!isOpen)} /> {/* Use the onClick handler here */}
       {isOpen && (
         <div className="fixed bottom-16 right-8 bg-white shadow-lg w-80 h-96 rounded-lg flex flex-col">
           <div className="bg-red-600 text-white p-4 font-bold rounded-t-lg flex items-center justify-between">
