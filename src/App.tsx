@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import FeatureCard from './components/FeatureCard';
 import { FaEnvelope, FaFacebook, FaGlobe, FaPhone } from 'react-icons/fa';
+import ChatBox from './components/ChatBox'; // Import the ChatBox component
 
 function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -89,25 +90,26 @@ function App() {
           </div>
         </section>
 
-        {/* Latest News Section */}
-        <section className="container mx-auto px-4 mb-12">
-          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Latest News</h2>
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <img src="images/news1.jpg" alt="News Image" className="w-full h-48 object-cover rounded-lg mb-4" />
-            <h3 className="text-xl font-semibold text-gray-800">New Research Materials Added</h3>
-            <p className="text-gray-600 mt-2">We have added a new collection of research papers to our digital library.</p>
-          </div>
-        </section>
+       {/* Latest News Section */}
+          {/* Latest News Section */}
+          <section className="container mx-auto px-4 mb-12">
+            <h2 className="text-3xl font-semibold mb-6 text-gray-800">Latest News</h2>
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <img src="images/news.jpg" alt="News Image" className="w-full h-64 object-cover object-[center_30%] rounded-lg mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800">New Research Materials Added</h3>
+              <p className="text-gray-600 mt-2">We have added a new collection of research papers to our digital library.</p>
+            </div>
+          </section>
 
-        {/* Events Section */}
-        <section className="container mx-auto px-4 mb-12">
-          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Upcoming Events</h2>
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <img src="images/event1.jpg" alt="Event Image" className="w-full h-48 object-cover rounded-lg mb-4" />
-            <h3 className="text-xl font-semibold text-gray-800">Book Reading Event</h3>
-            <p className="text-gray-600 mt-2">Join us for an exciting book reading session by our featured author.</p>
-          </div>
-        </section>
+          {/* Events Section */}
+          <section className="container mx-auto px-4 mb-12">
+            <h2 className="text-3xl font-semibold mb-6 text-gray-800">Upcoming Events</h2>
+            <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <img src="images/events.jpg" alt="Event Image" className="w-full h-64 object-cover object-[center_15%] rounded-lg mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800">Book Reading Event</h3>
+              <p className="text-gray-600 mt-2">Join us for an exciting book reading session by our featured author.</p>
+            </div>
+          </section>
 
         {/* How To Section */}
         <section className="container mx-auto px-4 mb-12">
@@ -159,6 +161,8 @@ function App() {
 
 
       </main>
+      {/* Add ChatBox */}
+      <ChatBox />
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-6">
