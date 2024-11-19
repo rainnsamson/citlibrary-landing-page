@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import FeatureCard from './components/FeatureCard';
 import { FaEnvelope, FaFacebook, FaGlobe, FaPhone } from 'react-icons/fa';
