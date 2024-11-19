@@ -76,23 +76,6 @@ function App() {
           </div>
         </section>
 
-        {/* OPAC Search Bar */}
-        <section className="container mx-auto px-4 mb-12 text-center">
-          <h3 className="text-4xl font-bold text-gray-800">Online Public Access Catalog</h3>
-          <p className="text-lg text-gray-600 mt-2">Search our Library Collection</p>
-          <div className="flex items-center justify-center mt-6">
-            <input
-              type="text"
-              placeholder="Enter keywords or titles"
-              className="w-2/3 md:w-1/2 px-4 py-3 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-r-full font-bold hover:bg-blue-700 transition-colors duration-300">
-              Search
-            </button>
-          </div>
-          <button className="mt-4 text-blue-600 font-semibold hover:underline">Advanced Search</button>
-        </section>
-
         {/* Features Section */}
         <section className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
