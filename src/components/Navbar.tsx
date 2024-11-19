@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faHome, 
+  faInfoCircle, 
+  faCog, 
+  faBook, 
+  faGraduationCap, 
+  faBuilding, 
+  faCalendarAlt, 
+  faSearch 
+} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<{ [key: string]: boolean }>({});
 
   const navItems = [
-    { name: 'Home', href: '#' },
+    { name: 'Home', href: '#', icon: faHome },
     {
       name: 'About Us',
+      icon: faInfoCircle,
       dropdown: [
         { name: 'History', href: '#' },
         { name: 'Mission & Vision', href: '#' },
@@ -16,50 +28,56 @@ const Navbar: React.FC = () => {
     },
     {
       name: 'Services',
+      icon: faCog,
       dropdown: [
         { name: 'Library Services', href: '#' },
         { name: 'Guidance Counseling', href: '#' },
       ],
     },
-    { 
-      name: 'Resources', 
+    {
+      name: 'Resources',
+      icon: faBook,
       dropdown: [
         { name: 'Books', href: '#' },
         { name: 'Digital Resources', href: '#' },
         { name: 'Research Guides', href: '#' },
-      ] 
+      ],
     },
     {
       name: 'School Program',
+      icon: faGraduationCap,
       dropdown: [
         { name: 'Elementary', href: '#' },
         { name: 'High School', href: '#' },
         { name: 'Special Programs', href: '#' },
       ],
     },
-    { 
-      name: 'Facilities', 
+    {
+      name: 'Facilities',
+      icon: faBuilding,
       dropdown: [
         { name: 'Library', href: '#' },
         { name: 'Laboratories', href: '#' },
         { name: 'Sports Facilities', href: '#' },
-      ] 
+      ],
     },
-    { 
-      name: 'Activities', 
+    {
+      name: 'Activities',
+      icon: faCalendarAlt,
       dropdown: [
         { name: 'Clubs & Societies', href: '#' },
         { name: 'Sports Events', href: '#' },
         { name: 'Workshops', href: '#' },
-      ] 
+      ],
     },
-    { 
-      name: 'OPAC (Online Public Access Catalog)', 
+    {
+      name: 'OPAC (Online Public Access Catalog)',
+      icon: faSearch,
       dropdown: [
         { name: 'Search Catalog', href: '#' },
         { name: 'Reserve Books', href: '#' },
         { name: 'User Guide', href: '#' },
-      ] 
+      ],
     },
   ];
 
@@ -109,6 +127,7 @@ const Navbar: React.FC = () => {
                     onClick={() => toggleDropdown(item.name)}
                     className="text-white hover:text-gray-200 transition-colors duration-200 text-sm font-medium block py-1 border-b-2 border-transparent hover:border-white flex items-center"
                   >
+                    <FontAwesomeIcon icon={item.icon} className="mr-2" />
                     {item.name}
                     <svg
                       className="ml-2 w-4 h-4"
@@ -143,8 +162,9 @@ const Navbar: React.FC = () => {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-white hover:text-gray-200 transition-colors duration-200 text-sm font-medium block py-1 border-b-2 border-transparent hover:border-white"
+                    className="text-white hover:text-gray-200 transition-colors duration-200 text-sm font-medium block py-1 border-b-2 border-transparent hover:border-white flex items-center"
                   >
+                    <FontAwesomeIcon icon={item.icon} className="mr-2" />
                     {item.name}
                   </a>
                 </li>
