@@ -10,27 +10,27 @@ import {
   faCalendarAlt, 
   faSearch 
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';  // Import Link
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<{ [key: string]: boolean }>({});
 
   const navItems = [
-    { name: 'Home', href: '#', icon: faHome },
+    { name: 'Home', href: '/', icon: faHome }, // Use `href` with `Link` in Navbar
     {
       name: 'About Us',
       icon: faInfoCircle,
       dropdown: [
         { name: 'History', href: '#' },
         { name: 'Mission & Vision', href: '#' },
-        { name: 'Leadership', href: '#' },
       ],
     },
     {
       name: 'Services',
       icon: faCog,
       dropdown: [
-        { name: 'Library Services', href: '#' },
+        { name: 'Library Services', href: '/library-services' },
         { name: 'Guidance Counseling', href: '#' },
       ],
     },
@@ -148,25 +148,25 @@ const Navbar: React.FC = () => {
                   >
                     {item.dropdown.map((subItem) => (
                       <li key={subItem.name}>
-                        <a
-                          href={subItem.href}
+                        <Link
+                          to={subItem.href} // Use `Link` for navigation
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-600 hover:text-white"
                         >
                           {subItem.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
                 </li>
               ) : (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href} // Use `Link` for navigation
                     className="text-white hover:text-gray-200 transition-colors duration-200 text-sm font-medium block py-1 border-b-2 border-transparent hover:border-white flex items-center"
                   >
                     <FontAwesomeIcon icon={item.icon} className="mr-2" />
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               )
             )}
