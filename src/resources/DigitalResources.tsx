@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { FaDatabase, FaSearch, FaGlobe, FaVideo, FaHeadphones, FaBook, FaNewspaper, FaDownload, FaExternalLinkAlt } from "react-icons/fa";
+import { FaDatabase, FaSearch, FaGlobe, FaVideo, FaHeadphones, FaBook, FaNewspaper, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 interface Resource {
