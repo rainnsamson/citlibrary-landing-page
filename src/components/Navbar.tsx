@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHome, 
@@ -8,22 +8,36 @@ import {
   faGraduationCap, 
   faBuilding, 
   faCalendarAlt, 
-  faSearch 
+  faSearch,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';  // Import Link
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+
+interface NavItem {
+  name: string;
+  href?: string;
+  icon: any;
+  dropdown?: Array<{
+    name: string;
+    href: string;
+  }>;
+}
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<{ [key: string]: boolean }>({});
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
-  const navItems = [
-    { name: 'Home', href: '/', icon: faHome }, // Use `href` with `Link` in Navbar
+  const navItems: NavItem[] = [
+    { name: 'Home', href: '/', icon: faHome },
     {
       name: 'About Us',
       icon: faInfoCircle,
       dropdown: [
-        { name: 'History', href: '#' },
-        { name: 'Mission & Vision', href: '#' },
+        { name: 'History', href: '/history' },
+        { name: 'Mission & Vision', href: '/mission-vision' },
       ],
     },
     {
@@ -31,147 +45,226 @@ const Navbar: React.FC = () => {
       icon: faCog,
       dropdown: [
         { name: 'Library Services', href: '/library-services' },
-        { name: 'Guidance Counseling', href: '#' },
       ],
     },
     {
       name: 'Resources',
       icon: faBook,
       dropdown: [
-        { name: 'Books', href: '#' },
-        { name: 'Digital Resources', href: '#' },
-        { name: 'Research Guides', href: '#' },
+        { name: 'Books', href: '/books' },
+        { name: 'Digital Resources', href: '/digital-resources' },
+        { name: 'Research Guides', href: '/research-guides' },
       ],
     },
     {
       name: 'School Program',
       icon: faGraduationCap,
       dropdown: [
-        { name: 'Elementary', href: '#' },
-        { name: 'High School', href: '#' },
-        { name: 'Special Programs', href: '#' },
+        { name: 'Bachelor of Elementary Education', href: '/beed' },
+        { name: 'Bachelor of Science in Business Administration', href: '/bsba' },
+        { name: 'Teacher Certificate Program', href: '/tcp' },
       ],
     },
     {
       name: 'Facilities',
       icon: faBuilding,
       dropdown: [
-        { name: 'Library', href: '#' },
-        { name: 'Laboratories', href: '#' },
-        { name: 'Sports Facilities', href: '#' },
+        { name: 'Library', href: '/library' },
+        { name: 'Laboratories', href: '/labs' },
+        { name: 'Sports Facilities', href: '/sports' },
       ],
     },
+    { name: 'Archives', icon: faCalendarAlt, href: '/archives' },
     {
-      name: 'Activities',
-      icon: faCalendarAlt,
-      dropdown: [
-        { name: 'Clubs & Societies', href: '#' },
-        { name: 'Sports Events', href: '#' },
-        { name: 'Workshops', href: '#' },
-      ],
-    },
-    {
-      name: 'OPAC (Online Public Access Catalog)',
+      name: 'OPAC',
       icon: faSearch,
       dropdown: [
-        { name: 'Search Catalog', href: '#' },
-        { name: 'Reserve Books', href: '#' },
-        { name: 'User Guide', href: '#' },
+        { name: 'Search Catalog', href: '/search' },
+        { name: 'Reserve Books', href: '/reserve' },
+        { name: 'User Guide', href: '/guide' },
       ],
     },
   ];
 
-  const toggleDropdown = (itemName: string) => {
-    setDropdownOpen((prev) => ({
-      ...prev,
-      [itemName]: !prev[itemName],
-    }));
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+    setActiveDropdown(null);
+  }, [location]);
+
+  const handleDropdownClick = (itemName: string) => {
+    setActiveDropdown(activeDropdown === itemName ? null : itemName);
   };
 
   return (
-    <header className="bg-white shadow-lg fixed w-full top-0 z-50">
+    <header 
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-[#E4003A] shadow-lg' : 'bg-[#E4003A]'
+      }`}
+    >
       <div className="container mx-auto px-4">
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-red-600 hover:text-red-700"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {isOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+        <div className="flex justify-between items-center h-16">
+          {/* Logo/Brand */}
+            <Link to="/" className="flex items-center space-x-2">
+              <img 
+                src="/CIT.png" 
+                alt="CIT Logo" 
+                className="h-8 w-8" 
+              />
+              <span className="text-xl font-bold text-white">CIT Library</span>
+            </Link>
 
-        {/* Navigation */}
-        <nav
-          className={`bg-red-600 transform transition-transform duration-300 ease-in-out ${
-            isOpen ? 'block' : 'hidden md:block'
-          }`}
-        >
-          <ul className="flex flex-col md:flex-row md:justify-center md:items-center py-3 px-4 space-y-2 md:space-y-0 md:space-x-6">
-            {navItems.map((item) =>
-              item.dropdown ? (
-                <li key={item.name} className="relative group">
-                  <button
-                    onClick={() => toggleDropdown(item.name)}
-                    className="text-white hover:text-gray-200 transition-colors duration-200 text-sm font-medium block py-1 border-b-2 border-transparent hover:border-white flex items-center"
-                  >
-                    <FontAwesomeIcon icon={item.icon} className="mr-2" />
-                    {item.name}
-                    <svg
-                      className="ml-2 w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-red-600"
+            aria-label="Toggle menu"
+          >
+            <motion.div
+              animate={isOpen ? "open" : "closed"}
+              className="w-6 h-6 flex flex-col justify-center items-center"
+            >
+              <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+                isOpen ? 'rotate-45 translate-y-1' : ''
+              }`} />
+              <span className={`block w-5 h-0.5 bg-white mt-1 transition-all duration-300 ${
+                isOpen ? '-rotate-45 -translate-y-0.5' : ''
+              }`} />
+            </motion.div>
+          </button>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <div key={item.name} className="relative group">
+                {item.dropdown ? (
+                  <div>
+                    <button
+                      onClick={() => handleDropdownClick(item.name)}
+                      className="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-gray-200 flex items-center space-x-1 transition-colors duration-200"
                     >
-                      <path d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {/* Dropdown menu */}
-                  <ul
-                    className={`absolute left-0 top-full mt-1 bg-white shadow-lg rounded-md py-2 ${
-                      dropdownOpen[item.name] ? 'block' : 'hidden group-hover:block'
-                    }`}
-                  >
-                    {item.dropdown.map((subItem) => (
-                      <li key={subItem.name}>
-                        <Link
-                          to={subItem.href} // Use `Link` for navigation
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-600 hover:text-white"
+                      <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
+                      <span>{item.name}</span>
+                      <FontAwesomeIcon 
+                        icon={faChevronDown} 
+                        className={`w-3 h-3 transition-transform duration-200 ${
+                          activeDropdown === item.name ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {activeDropdown === item.name && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white"
                         >
-                          {subItem.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li key={item.name}>
+                          <div className="py-1">
+                            {item.dropdown.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                to={subItem.href}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600"
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
                   <Link
-                    to={item.href} // Use `Link` for navigation
-                    className="text-white hover:text-gray-200 transition-colors duration-200 text-sm font-medium block py-1 border-b-2 border-transparent hover:border-white flex items-center"
+                    to={item.href || '#'}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-gray-200 flex items-center space-x-1 transition-colors duration-200"
                   >
-                    <FontAwesomeIcon icon={item.icon} className="mr-2" />
-                    {item.name}
+                    <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
+                    <span>{item.name}</span>
                   </Link>
-                </li>
-              )
-            )}
-          </ul>
-        </nav>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.nav
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden bg-white border-t mt-2"
+            >
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                {navItems.map((item) => (
+                  <div key={item.name}>
+                    {item.dropdown ? (
+                      <div>
+                        <button
+                          onClick={() => handleDropdownClick(item.name)}
+                          className="w-full px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 flex items-center justify-between"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
+                            <span>{item.name}</span>
+                          </div>
+                          <FontAwesomeIcon 
+                            icon={faChevronDown} 
+                            className={`w-3 h-3 transition-transform duration-200 ${
+                              activeDropdown === item.name ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
+                        <AnimatePresence>
+                          {activeDropdown === item.name && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="pl-6 space-y-1"
+                            >
+                              {item.dropdown.map((subItem) => (
+                                <Link
+                                  key={subItem.name}
+                                  to={subItem.href}
+                                  className="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-red-600"
+                                >
+                                  {subItem.name}
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        to={item.href || '#'}
+                        className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-red-600"
+                      >
+                        <FontAwesomeIcon icon={item.icon} className="w-4 h-4 inline-block mr-2" />
+                        {item.name}
+                      </Link>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
