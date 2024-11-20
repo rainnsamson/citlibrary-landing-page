@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { FaBook, FaClock, FaUsers, FaClipboardList, FaGlobe, FaBookReader } from 'react-icons/fa';
 import ChatBox from '../components/ChatBox';
 
-const LibraryServices: FC = () => {
+const LibraryGuide: FC = () => {
   const libraryCollections = [
     {
       icon: <FaBook className="w-8 h-8 text-white" />,
@@ -48,7 +48,7 @@ const LibraryServices: FC = () => {
       <section className="relative bg-white py-16">
         <div className="text-center px-4 mb-6 pt-16">
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 mb-4">
-            Library Services
+            Library Guides
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Discover the various services we offer to enhance your learning and research experience.
@@ -114,4 +114,4 @@ const LibraryServices: FC = () => {
   );
 };
 
-export default LibraryServices;
+export default LibraryGuide;

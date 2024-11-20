@@ -44,6 +44,7 @@ const Navbar: React.FC = () => {
       name: 'Services',
       icon: faCog,
       dropdown: [
+        { name: 'Library Guide', href: '/library-guide' },
         { name: 'Library Services', href: '/library-services' },
       ],
     },
