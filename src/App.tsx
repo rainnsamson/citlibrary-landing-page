@@ -9,6 +9,7 @@ import DigitalResources from './resources/DigitalResources';
 import ResearchGuides from './resources/ResearchGuides';
 import Archives from './archive/Archives';
 import LibraryGuide from './services1/Library_Guide';
+import SearchCatalog from './opac/SearchCatalog';
 
 const App: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const App: React.FC = () => {
         <Route path="/digital-resources" element={<DigitalResources  />} />
         <Route path="/research-guides" element={<ResearchGuides  />} />
         <Route path="/archives" element={<Archives  />} />
+        <Route path="/search" element={<SearchCatalog  />} />
       </Routes>
     </Router>
   );
