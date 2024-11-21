@@ -80,7 +80,7 @@
         name: 'OPAC',
         icon: faSearch,
         dropdown: [
-          { name: 'Search Catalog', href: '/search' },
+          { name: 'Search Catalog', href: 'https://citlibrary-locate.netlify.app/' },
           { name: 'Reserve Books', href: '/reserve' },
           { name: 'User Guide', href: '/guide' },
         ],
